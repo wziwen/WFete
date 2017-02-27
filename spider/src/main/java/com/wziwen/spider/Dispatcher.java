@@ -16,9 +16,21 @@ public class Dispatcher  {
 
     private int threadCount = 50;
 
-    private List<Thread> threadList = new ArrayList<Thread>(10);
+    private List<Thread> threadList = new ArrayList<>(10);
 
     private FetcherFactory fetcherFactory = new FetcherFactory();
+
+    private ParseProvider parseProvider = new ParseProvider();
+
+    private IDataCenter<Task> dataCenter;
+
+    private List<Task> taskList = new LinkedList<>();
+
+    private boolean started = false;
+
+    public Dispatcher() {
+
+    }
 
     public FetcherFactory getFetcherFactory() {
         return fetcherFactory;
@@ -33,18 +45,6 @@ public class Dispatcher  {
         return this;
     }
 
-    private ParseProvider parseProvider = new ParseProvider();
-
-    private IDataCenter<Task> dataCenter;
-
-    private List<Task> taskList = new LinkedList<Task>();
-
-    private boolean started = false;
-
-    public Dispatcher() {
-
-    }
-
     public Dispatcher setDataCenter(IDataCenter<Task> dataCenter) {
         this.dataCenter = dataCenter;
         dataCenter.open();
@@ -52,7 +52,7 @@ public class Dispatcher  {
     }
 
     /**
-     * @param count
+     * @param count 线程数量
      */
     public Dispatcher setThreadCount(int count) {
         if (count >= 1) {
@@ -68,24 +68,6 @@ public class Dispatcher  {
         return this;
     }
 
-    private void checkTaskAndRun() {
-        if (!started) {
-            return;
-        }
-
-        if (taskList != null) {
-            int leftThreadCount = threadCount - threadList.size();
-            for (int i = 0; i < taskList.size() && i < leftThreadCount; i++) {
-                TaskRunnable taskRunnable = new TaskRunnable();
-                Thread thread = new Thread(taskRunnable);
-                taskRunnable.setThread(thread);
-                threadList.add(thread);
-                thread.start();
-                System.out.println("Dispatcher: start thread:" + i);
-            }
-        }
-    }
-
     public Dispatcher addTask(Task task) {
         task.setCreateTime(System.currentTimeMillis());
         dataCenter.saveTask(task);
@@ -99,14 +81,6 @@ public class Dispatcher  {
     public void updateTask(Task task) {
         task.setUpdateTime(System.currentTimeMillis());
         dataCenter.updateTask(task);
-    }
-
-    public void deleteTask(Task task) {
-        dataCenter.deleteTask(task);
-    }
-
-    public void dispatch(Task task) {
-
     }
 
     public void waitForComplete() {
@@ -139,15 +113,34 @@ public class Dispatcher  {
 
     }
 
+    private void checkTaskAndRun() {
+        if (!started) {
+            return;
+        }
+
+        if (taskList != null) {
+            int leftThreadCount = threadCount - threadList.size();
+            for (int i = 0; i < taskList.size() && i < leftThreadCount; i++) {
+                TaskRunnable taskRunnable = new TaskRunnable();
+                Thread thread = new Thread(taskRunnable);
+                taskRunnable.setThread(thread);
+                threadList.add(thread);
+                thread.start();
+                System.out.println("Dispatcher: start thread:" + i);
+            }
+        }
+    }
+
+    /**
+     * 任务执行线程. 不停地运行任务, 知道等到10次后(每次5s)都没有新任务则退出
+     */
     private class TaskRunnable implements Runnable {
-
         Thread thread;
-
         int sleepTime = 5000;
         int sleepCount = 10;
         int currentSleepCount = 0;
 
-        public void setThread(Thread thread) {
+        void setThread(Thread thread) {
             this.thread = thread;
         }
 
@@ -197,7 +190,7 @@ public class Dispatcher  {
 
     /**
      * 获取下一个任务. 如果内存中没有时会尝试从数据库获取
-     * @return
+     * @return 先一个可执行任务, 如果没有则为 null
      */
     private synchronized Task getTask() {
         if (taskList == null || taskList.size() == 0) {
