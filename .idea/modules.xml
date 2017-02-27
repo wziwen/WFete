@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/App/App.iml" filepath="$PROJECT_DIR$/.idea/modules/App/App.iml" group="App" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/App/App_main.iml" filepath="$PROJECT_DIR$/.idea/modules/App/App_main.iml" group="App" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/App/App_test.iml" filepath="$PROJECT_DIR$/.idea/modules/App/App_test.iml" group="App" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WFete.iml" filepath="$PROJECT_DIR$/.idea/modules/WFete.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WFete_main.iml" filepath="$PROJECT_DIR$/.idea/modules/WFete_main.iml" group="WFete" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WFete_test.iml" filepath="$PROJECT_DIR$/.idea/modules/WFete_test.iml" group="WFete" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spider/spider.iml" filepath="$PROJECT_DIR$/.idea/modules/spider/spider.iml" group="spider" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spider/spider_main.iml" filepath="$PROJECT_DIR$/.idea/modules/spider/spider_main.iml" group="spider" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spider/spider_test.iml" filepath="$PROJECT_DIR$/.idea/modules/spider/spider_test.iml" group="spider" />
+    </modules>
+  </component>
+</project>

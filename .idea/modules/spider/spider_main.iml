@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":spider:main" external.linked.project.path="$MODULE_DIR$/../../../spider" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="WFete" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../../../spider/build/classes/main" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../spider/src/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../../spider/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../spider/src/main/resources" type="java-resource" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../spider/libs/jsoup-1.10.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../spider/libs/ormlite-android-5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../spider/libs/ormlite-core-5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../spider/libs/ormlite-jdbc-5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../spider/libs/sqlite-jdbc-3.16.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: net.sourceforge.htmlunit:htmlunit:2.4" level="project" />
+    <orderEntry type="library" name="Gradle: xalan:xalan:2.7.1" level="project" />
+    <orderEntry type="library" name="Gradle: commons-collections:commons-collections:3.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: commons-lang:commons-lang:2.4" level="project" />
+    <orderEntry type="library" name="Gradle: commons-httpclient:commons-httpclient:3.1" level="project" />
+    <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.3" level="project" />
+    <orderEntry type="library" name="Gradle: net.sourceforge.htmlunit:htmlunit-core-js:2.4" level="project" />
+    <orderEntry type="library" name="Gradle: net.sourceforge.nekohtml:nekohtml:1.9.11" level="project" />
+    <orderEntry type="library" name="Gradle: net.sourceforge.cssparser:cssparser:0.9.5" level="project" />
+    <orderEntry type="library" name="Gradle: commons-io:commons-io:1.4" level="project" />
+    <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.1.1" level="project" />
+    <orderEntry type="library" name="Gradle: xalan:serializer:2.7.1" level="project" />
+    <orderEntry type="library" name="Gradle: xerces:xercesImpl:2.8.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.w3c.css:sac:1.3" level="project" />
+    <orderEntry type="library" name="Gradle: xml-apis:xml-apis:1.3.04" level="project" />
+  </component>
+</module>
