@@ -7,6 +7,7 @@ import com.wziwen.spider.Task;
 
 /**
  * Created by ziwen.wen on 2017/2/23.
+ * xiaopian.com 电影天堂电影
  */
 public class dytt {
 
@@ -23,7 +24,7 @@ public class dytt {
         ormLiteDataCenter.setDbName("dytt.db");
         dispatcher.setDataCenter(ormLiteDataCenter)
                 .addTask(task)
-                .addParser(20, new ChapterParser(20, 21))
+                .addParser(20, new PageParser(20, 21))
                 .addParser(21, new MovieParser())
                 .setThreadCount(250)
                 .start()

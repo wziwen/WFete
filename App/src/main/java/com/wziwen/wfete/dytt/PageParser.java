@@ -15,15 +15,15 @@ import java.util.regex.Pattern;
 
 /**
  * Created by wen on 2017/2/15.
- * 天域苍穹
+ * 电影天堂, 页面爬去
  */
-public class ChapterParser implements IParser<String> {
+public class PageParser implements IParser<String> {
     private static final String BASE_URL = "http://www.xiaopian.com";
 
-    int type = 20;
-    int contentParserType = 21;
+    private int type = 20;
+    private int contentParserType = 21;
 
-    public ChapterParser(int type, int contentParserType) {
+    public PageParser(int type, int contentParserType) {
         this.type = type;
         this.contentParserType = contentParserType;
     }
@@ -65,9 +65,9 @@ public class ChapterParser implements IParser<String> {
             task.setFetcherType(FetcherFactory.FETCHER_HTML);
             task.setParserType(contentParserType);
             String title = String.format("%04d--%s", count ++, element.text());
-            task.setExtra(title); // 章节名称
+            task.setExtra(title); // 名称
 
-//            Pattern pattern = Pattern.compile("\\d{1}\\.\\d{1}");
+            // 通过正则获取电影评分, 但不是所有电影都有评分
             Pattern pattern = Pattern.compile("(\\d{1}\\.\\d{1}|\\d{1})分");
             Matcher matcher = pattern.matcher(title);
             double score = 0;
@@ -75,12 +75,13 @@ public class ChapterParser implements IParser<String> {
                 try {
                     score = Double.parseDouble(matcher.group(0).replace("分", ""));
                 } catch (Exception e) {
-                    System.out.println("ChapterParser find score fail");
+                    System.out.println("PageParser find score fail");
                     e.printStackTrace();
                 }
             }
 
-            if (score >= 7) {
+            // 只获取7分以上电影
+            if (score >= 7.0F) {
                 System.out.println("new Chapter: " + title);
                 dispatcher.addTask(task);
             } else {
@@ -89,6 +90,11 @@ public class ChapterParser implements IParser<String> {
         }
     }
 
+    /**
+     * 获取所有的页面. 也可以直接根据规则生成所有页面链接
+     * @param dispatcher
+     * @param document
+     */
     private void getAllPage(Dispatcher dispatcher, Document document) {
         Elements elements = document.select("select option");
         for (int i = 0; i < elements.size(); i ++) {

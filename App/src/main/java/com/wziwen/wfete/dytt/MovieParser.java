@@ -16,6 +16,7 @@ import java.util.Base64;
 
 /**
  * Created by wen on 2017/2/15.
+ * 电影信息获取
  */
 public class MovieParser implements IParser<String> {
 
@@ -34,6 +35,7 @@ public class MovieParser implements IParser<String> {
 
         String url = document.getElementById("Zoom").getElementsByTag("a").get(0).attr("href");
 
+        // 生成小米路由器下载链接
         String downloadUrl = "http://d.miwifi.com/d2r/?url=" +
                 new String(Base64.getEncoder().encode(url.getBytes())) + "&src=demo";
 

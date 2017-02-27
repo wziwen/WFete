@@ -10,14 +10,15 @@ import java.util.List;
 
 /**
  * Created by ziwen.wen on 2017/2/10.
+ * 任务管理类
  */
 public class Dispatcher  {
 
     private int threadCount = 50;
 
-    List<Thread> threadList = new ArrayList<Thread>(10);
+    private List<Thread> threadList = new ArrayList<Thread>(10);
 
-    FetcherFactory fetcherFactory = new FetcherFactory();
+    private FetcherFactory fetcherFactory = new FetcherFactory();
 
     public FetcherFactory getFetcherFactory() {
         return fetcherFactory;
@@ -32,14 +33,13 @@ public class Dispatcher  {
         return this;
     }
 
-    ParseProvider parseProvider = new ParseProvider();
+    private ParseProvider parseProvider = new ParseProvider();
 
-    IDataCenter<Task> dataCenter;
+    private IDataCenter<Task> dataCenter;
 
-    List<Task> taskList = new LinkedList<Task>();
+    private List<Task> taskList = new LinkedList<Task>();
 
-
-    boolean started = false;
+    private boolean started = false;
 
     public Dispatcher() {
 
@@ -190,14 +190,17 @@ public class Dispatcher  {
                 }
             }
 
-            // if not task left, just
+            // 没有任务退出线程, 从运行的线程列表中移除当前线程
             threadList.remove(thread);
         }
     }
 
+    /**
+     * 获取下一个任务. 如果内存中没有时会尝试从数据库获取
+     * @return
+     */
     private synchronized Task getTask() {
         if (taskList == null || taskList.size() == 0) {
-//             if taskList is empty, update for dataCenter
             taskList = dataCenter.listUnFinishedTask();
             if (taskList == null || taskList.size() == 0) {
                 return null;
