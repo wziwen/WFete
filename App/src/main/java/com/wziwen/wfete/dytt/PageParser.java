@@ -18,10 +18,12 @@ import java.util.regex.Pattern;
  * 电影天堂, 页面爬去
  */
 public class PageParser implements IParser<String> {
-    private static final String BASE_URL = "http://www.xiaopian.com";
 
     private int type = 20;
     private int contentParserType = 21;
+    private int maxPage;
+    private String hostUrl = "http://www.xiaopian.com";
+    private String pageBaseUrl = "http://www.xiaopian.com";
 
     public PageParser(int type, int contentParserType) {
         this.type = type;
@@ -60,7 +62,7 @@ public class PageParser implements IParser<String> {
             Elements element = elements.get(i).getElementsByClass("ulink");
 
             Task task = new Task();
-            String url = BASE_URL + element.attr("href");
+            String url = hostUrl + element.attr("href");
             task.setUrl(url);
             task.setFetcherType(FetcherFactory.FETCHER_HTML);
             task.setParserType(contentParserType);
@@ -97,14 +99,26 @@ public class PageParser implements IParser<String> {
      */
     private void getAllPage(Dispatcher dispatcher, Document document) {
         Elements elements = document.select("select option");
-        for (int i = 0; i < elements.size(); i ++) {
+        for (int i = 0; i < elements.size() && i < maxPage; i ++) {
             Task task = new Task();
-            String url = BASE_URL + elements.get(i).val();
+            String url = pageBaseUrl + elements.get(i).val();
             task.setUrl(url);
             task.setFetcherType(FetcherFactory.FETCHER_JS_WEB);
             task.setParserType(type);
 
             dispatcher.addTask(task);
         }
+    }
+
+    public void setMaxPage(int maxPage) {
+        this.maxPage = maxPage;
+    }
+
+    public void setHostUrl(String hostUrl) {
+        this.hostUrl = hostUrl;
+    }
+
+    public void setPageBaseUrl(String pageBaseUrl) {
+        this.pageBaseUrl = pageBaseUrl;
     }
 }

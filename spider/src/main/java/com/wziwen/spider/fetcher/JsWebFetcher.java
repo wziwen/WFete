@@ -24,6 +24,8 @@ public class JsWebFetcher implements IFetcher<Task, String>{
             wc.setCssEnabled(false);
             wc.setThrowExceptionOnScriptError(false);
             wc.setTimeout(10000);
+            wc.setPrintContentOnFailingStatusCode(false);
+            wc.setThrowExceptionOnFailingStatusCode(false);
             HtmlPage page = wc.getPage(task.getUrl());
             String pageXml = page.asXml();
 

@@ -21,6 +21,7 @@ import java.util.Base64;
 public class MovieParser implements IParser<String> {
 
     private String outputDir;
+    private String fileName = "Dytt.txt";
 
     public MovieParser() {
     }
@@ -43,7 +44,7 @@ public class MovieParser implements IParser<String> {
     }
 
     private synchronized void writeFile(String str) {
-        File file = new File("Dytt.txt");
+        File file = new File(fileName);
         try {
             FileOutputStream outputStream = new FileOutputStream(file, true);
             outputStream.write(str.getBytes());
@@ -53,5 +54,9 @@ public class MovieParser implements IParser<String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }
